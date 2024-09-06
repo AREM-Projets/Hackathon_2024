@@ -1,3 +1,7 @@
+/*
+TOF sur D4: SDA; D5: SCL
+*/
+
 #include <Arduino.h>
 #include <Servo.h>
 
