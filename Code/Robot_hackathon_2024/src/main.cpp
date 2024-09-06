@@ -45,12 +45,13 @@ void setup() {
   // timing budget.
   sensor.startContinuous(200);
 
-  head.attach(A1);
-  moteurD.attach(A2);
-  moteurG.attach(A3);
+  // head.attach(A1);
+  moteurD.attach(A1); //A2
+  moteurG.attach(A0); //A0
 
   moteurD.write(150);
   moteurG.write(50);
+  // head.write(50);
 
 }
 
