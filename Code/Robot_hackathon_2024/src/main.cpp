@@ -1,5 +1,13 @@
 /*
 TOF sur D4: SDA; D5: SCL
+
+Plage de vitesses moteur droit:
+Marche avant: 85 - 89
+Marche arrière: 101 - 105
+
+Plage de vitesses moteur gauche:
+Marche avant: 100 - 104
+Marche arrière: 85 - 88
 */
 
 #include <Arduino.h>
@@ -10,6 +18,9 @@ TOF sur D4: SDA; D5: SCL
 #include <VL53L1X.h>
 
 #define TOF_XSDN D3
+#define STOP_HAUT 100
+#define STOP_BAS 90
+#define SPEED_RANGE 5
 
 
 VL53L1X sensor;
@@ -49,13 +60,11 @@ void setup() {
   // timing budget.
   sensor.startContinuous(200);
 
-  // head.attach(A1);
-  moteurD.attach(A1); //A2
-  moteurG.attach(A0); //A0
+  moteurD.attach(A0); //A1
+  moteurG.attach(A1); //A0
 
-  moteurD.write(150);
-  moteurG.write(50);
-  // head.write(50);
+  moteurD.write(86);
+  moteurG.write(103);
 
 }
 
@@ -65,4 +74,22 @@ void loop()
   Serial.print(sensor.read());
 
   Serial.println();
+
+
+
+
+
+  // // Code pour tester les plages de vitesses
+  // for(int i=STOP_BAS-SPEED_RANGE; i<= STOP_HAUT+SPEED_RANGE; i++) {
+  //   moteurD.write(i);
+  //   Serial.println(i);
+  //   delay(1000);
+  // }
+  
+  // for(int i=STOP_HAUT+SPEED_RANGE; i>= STOP_BAS-SPEED_RANGE; i--) {
+  //   moteurD.write(i);
+  //   Serial.println(i);
+  //   delay(1000);
+  // }
+
 }
