@@ -608,6 +608,139 @@
 				)
 			)
 		)
+		(symbol "Device:Fuse"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "F"
+				(at 2.032 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Fuse"
+				(at -1.905 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Fuse"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "fuse"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*Fuse*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Fuse_0_1"
+				(rectangle
+					(start -0.762 -2.54)
+					(end 0.762 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Fuse_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:LED"
 			(pin_numbers hide)
 			(pin_names
@@ -1613,13 +1746,13 @@
 		(uuid "483ecb47-2d68-4dff-9c21-55695e19f0ac")
 	)
 	(junction
-		(at 106.68 68.58)
+		(at 106.68 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "70abc814-63b9-4774-83ef-bee078d0a5f0")
 	)
 	(junction
-		(at 104.14 68.58)
+		(at 104.14 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "748499f4-874f-452a-9d2f-741a9471f7cb")
@@ -1942,7 +2075,7 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 68.58) (xy 106.68 77.47)
+			(xy 106.68 59.69) (xy 106.68 77.47)
 		)
 		(stroke
 			(width 0)
@@ -1962,7 +2095,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 68.58) (xy 104.14 77.47)
+			(xy 104.14 59.69) (xy 104.14 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2172,6 +2305,16 @@
 	)
 	(wire
 		(pts
+			(xy 104.14 74.93) (xy 104.14 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a4d836ca-6315-4049-81e9-68745ca300ba")
+	)
+	(wire
+		(pts
 			(xy 85.09 133.35) (xy 85.09 135.89)
 		)
 		(stroke
@@ -2292,7 +2435,7 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 68.58) (xy 116.84 68.58)
+			(xy 106.68 59.69) (xy 116.84 59.69)
 		)
 		(stroke
 			(width 0)
@@ -2382,7 +2525,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 68.58) (xy 104.14 68.58)
+			(xy 93.98 59.69) (xy 104.14 59.69)
 		)
 		(stroke
 			(width 0)
@@ -2482,7 +2625,7 @@
 	)
 	(text "+  -"
 		(exclude_from_sim no)
-		(at 105.156 61.722 0)
+		(at 105.156 52.832 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2512,7 +2655,7 @@
 	)
 	(text "BATT\n\n"
 		(exclude_from_sim no)
-		(at 104.902 60.706 0)
+		(at 104.902 51.816 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2568,7 +2711,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_EH_B4B-EH-A_1x04_P2.50mm_Vertical"
+		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_1x04_P1.27mm_Horizontal"
 			(at 144.78 144.78 0)
 			(effects
 				(font
@@ -2692,7 +2835,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 93.98 68.58 0)
+		(at 93.98 59.69 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2700,7 +2843,7 @@
 		(dnp no)
 		(uuid "44d11bc7-d8a9-46d9-a8fa-bf5cdeb763f0")
 		(property "Reference" "#FLG01"
-			(at 93.98 66.675 0)
+			(at 93.98 57.785 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2709,7 +2852,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 87.63 67.056 0)
+			(at 87.63 58.166 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2717,7 +2860,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 93.98 68.58 0)
+			(at 93.98 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2726,7 +2869,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 93.98 68.58 0)
+			(at 93.98 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2735,7 +2878,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 93.98 68.58 0)
+			(at 93.98 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3037,7 +3180,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
-		(at 106.68 63.5 270)
+		(at 106.68 54.61 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3046,7 +3189,7 @@
 		(fields_autoplaced yes)
 		(uuid "88e61e4c-c863-42aa-8f58-cd86bbf8ba89")
 		(property "Reference" "J5"
-			(at 107.95 62.8649 90)
+			(at 107.95 53.9749 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3055,7 +3198,7 @@
 			)
 		)
 		(property "Value" "Conn_01x02_Pin"
-			(at 107.95 65.4049 90)
+			(at 107.95 56.5149 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3065,7 +3208,7 @@
 			)
 		)
 		(property "Footprint" "Connector_JST:JST_EH_B2B-EH-A_1x02_P2.50mm_Vertical"
-			(at 106.68 63.5 0)
+			(at 106.68 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3074,7 +3217,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 106.68 63.5 0)
+			(at 106.68 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3083,7 +3226,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 106.68 63.5 0)
+			(at 106.68 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3321,7 +3464,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 116.84 68.58 0)
+		(at 116.84 59.69 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3330,7 +3473,7 @@
 		(fields_autoplaced yes)
 		(uuid "bf775873-6325-4501-9ecf-08da6893bad4")
 		(property "Reference" "#FLG02"
-			(at 116.84 66.675 0)
+			(at 116.84 57.785 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3339,7 +3482,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 116.84 63.5 0)
+			(at 116.84 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3347,7 +3490,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 116.84 68.58 0)
+			(at 116.84 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3356,7 +3499,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 116.84 68.58 0)
+			(at 116.84 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3365,7 +3508,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 116.84 68.58 0)
+			(at 116.84 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3600,6 +3743,76 @@
 			(project "pcb_robot"
 				(path "/91f39a07-0ac5-488f-8676-1797c523e1f2"
 					(reference "#FLG03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Fuse")
+		(at 104.14 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ebc268e6-1bf9-4e62-98fb-56021136ed2e")
+		(property "Reference" "F1"
+			(at 96.266 69.342 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "Fuse"
+			(at 96.52 70.612 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
+			(at 102.362 71.12 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 104.14 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fuse"
+			(at 104.14 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "c5cefbce-00f8-4cc9-a592-8d949d52f20d")
+		)
+		(pin "1"
+			(uuid "a89887da-0bbe-4f2f-a020-46ab5497e572")
+		)
+		(instances
+			(project ""
+				(path "/91f39a07-0ac5-488f-8676-1797c523e1f2"
+					(reference "F1")
 					(unit 1)
 				)
 			)
