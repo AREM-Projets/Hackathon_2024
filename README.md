@@ -8,6 +8,7 @@ Dépôt pour le projet Hackathon 2024
 * TOF Opérationnel. Placé à l'avant, ce sont les yeux du robot pour éviter des obstacles.
 * Première version du chassis (v3) ok avec l'ensemble des composants.
 * Prototype fait avec une breadboard soudable ok, un pcb est en conception.
+* PCB en fabrication proto côté école
 
 ## Obstacles / Points délicats
 
