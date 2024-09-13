@@ -12,4 +12,3 @@ Dépôt pour le projet Hackathon 2024
 ## Obstacles / Points délicats
 
 * Passage sur STM32CubeIde complexe à envisager bien qu'il soit préférable. En effet l'utilisation d'un tof avec CubeIde est à creuser. Bof pour le capteur ultrasons (il voit moins loin et est moins fiable). Pour le TOF, la communication I2C est intéressante.
-* Taille de la batterie: essayer celles de Bourguet, sinon faire avec en trouvant un bon positionnement sur le robot (revoir le chassis?).
