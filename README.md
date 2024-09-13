@@ -8,8 +8,8 @@ Dépôt pour le projet Hackathon 2024
 * TOF Opérationnel. Placé à l'avant, ce sont les yeux du robot pour éviter des obstacles.
 * Première version du chassis (v3) ok avec l'ensemble des composants.
 * Prototype fait avec une breadboard soudable ok, un pcb est en conception.
+* PCB en fabrication proto côté école
 
 ## Obstacles / Points délicats
 
 * Passage sur STM32CubeIde complexe à envisager bien qu'il soit préférable. En effet l'utilisation d'un tof avec CubeIde est à creuser. Bof pour le capteur ultrasons (il voit moins loin et est moins fiable). Pour le TOF, la communication I2C est intéressante.
-* Taille de la batterie: essayer celles de Bourguet, sinon faire avec en trouvant un bon positionnement sur le robot (revoir le chassis?).
