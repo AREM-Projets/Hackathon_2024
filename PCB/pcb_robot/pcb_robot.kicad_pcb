@@ -5091,7 +5091,7 @@
 			(justify bottom mirror)
 		)
 	)
-	(gr_text "BATT (+, -)\n\n\nUtilisation normale: 5V, 3A"
+	(gr_text "BATT (+, -)\n\n\nUtilisation normale: 5V, 0.2A"
 		(at 132 94 90)
 		(layer "B.SilkS")
 		(uuid "5d04faa6-d533-4e7f-90f5-80e90512c84e")
