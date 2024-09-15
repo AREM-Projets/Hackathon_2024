@@ -12,29 +12,73 @@ Marche arrière: 85 - 88
 
 #include <Arduino.h>
 #include <Servo.h>
-
-
 #include <Wire.h>
 #include <VL53L1X.h>
 
 #define TOF_XSDN D3
-#define STOP_HAUT 100
-#define STOP_BAS 90
-#define SPEED_RANGE 5
+#define MOTOR_D_BACKWARD_STOP 1565
+#define MOTOR_D_FORWARD_STOP 1465
 
+#define MOTOR_G_BACKWARD_STOP 1475
+#define MOTOR_G_FORWARD_STOP 1575
+#define MOTOR_G_SPEED_RANGE 50
+
+#define MOTOR_STOPf_TO_STOPb_RANGE 100
+
+
+
+
+void init_tof(VL53L1X& sensor);
+void init_base(Servo& motorL, Servo& motorR);
+
+// prototypes des fonctions de navigation:
+// void set_speed(float speed);
+// void set_position(float posx);
+// void set_angle(float angle);
 
 VL53L1X sensor;
+Servo motorL;
+Servo motorR;
 
 
-Servo moteurG;
-Servo moteurD;
-Servo head;
+
 
 void setup() {
 
-  
+  init_base(motorL, motorR);
+  init_tof(sensor);
 
 
+ 
+  motorL.writeMicroseconds(MOTOR_G_FORWARD_STOP+MOTOR_G_SPEED_RANGE-7);
+  motorR.writeMicroseconds(MOTOR_D_FORWARD_STOP-MOTOR_G_SPEED_RANGE);
+
+}
+
+
+void loop()
+{
+  Serial.print(sensor.read());
+
+  Serial.println();
+
+
+}
+
+
+
+
+
+
+
+
+
+void init_base(Servo& motorL, Servo& motorR) {
+  motorR.attach(A0);
+  motorL.attach(A1);
+}
+
+void init_tof(VL53L1X& sensor) {
   pinMode(TOF_XSDN, OUTPUT);
   digitalWrite(TOF_XSDN, 0);
   pinMode(TOF_XSDN, INPUT);
@@ -59,37 +103,5 @@ void setup() {
   // inter-measurement period). This period should be at least as long as the
   // timing budget.
   sensor.startContinuous(200);
-
-  moteurD.attach(A0); //A1
-  moteurG.attach(A1); //A0
-
-  moteurD.write(86);
-  moteurG.write(103);
-
-}
-
-
-void loop()
-{
-  Serial.print(sensor.read());
-
-  Serial.println();
-
-
-
-
-
-  // // Code pour tester les plages de vitesses
-  // for(int i=STOP_BAS-SPEED_RANGE; i<= STOP_HAUT+SPEED_RANGE; i++) {
-  //   moteurD.write(i);
-  //   Serial.println(i);
-  //   delay(1000);
-  // }
-  
-  // for(int i=STOP_HAUT+SPEED_RANGE; i>= STOP_BAS-SPEED_RANGE; i--) {
-  //   moteurD.write(i);
-  //   Serial.println(i);
-  //   delay(1000);
-  // }
 
 }
