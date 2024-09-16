@@ -17,14 +17,31 @@ TOF sur D4: SDA; D5: SCL
 #define MOTOR_D_FORWARD_STOP 1465
 #define MOTOR_D_SPEED_RANGE 50
 
+#define ROBOT_SPEED_MS 0.1174 //robot speed in m/s
+#define ROBOT_WHEEL_SPACING_M 0.114 //robot space between wheels in m
+#define ROBOT_ANGLUAR_SPEED_COEF 0.95
 
-
-
+#define ROBOT_ANGULAR_SPEED_DEGS 2*ROBOT_SPEED_MS/ROBOT_WHEEL_SPACING_M * ROBOT_ANGLUAR_SPEED_COEF
 
 
 
 typedef enum {LEFT, RIGHT} side;
 typedef enum {FORWARD, BACKWARD, STOP} rundir;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*Classes*/
 class Motor
@@ -32,7 +49,6 @@ class Motor
 public:
   void motor_init(side s);
   void motor_run(rundir dir);
-  
 
 
 private:
@@ -78,6 +94,20 @@ void Motor::motor_run(rundir dir) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Tof
 {
 public:
@@ -119,8 +149,6 @@ void Tof::tof_init(void) {
 }
 
 
-
-
 bool Tof::tof_proximity(unsigned int seuil) {
   if(sensor.read() < seuil) return true;
   else return false;
@@ -138,6 +166,13 @@ void Tof::tof_print_measure(void) {
 
 
 
+
+
+
+
+
+
+
 class Base
 {
 public:
@@ -145,6 +180,8 @@ public:
   void base_run(rundir dir);
   bool base_proximity(unsigned int seuil = 140);
   void base_print_param(void);
+  void base_run_m(rundir dir, float d);
+  void base_turn_deg(side s, unsigned int a);
 
 
 private:
@@ -167,6 +204,39 @@ void Base::base_run(rundir dir) {
   motorR.motor_run(dir);
 }
 
+
+
+void Base::base_run_m(rundir dir, float d) {
+  /*Warning: this method is blocking*/
+
+  base_run(dir);
+  delayMicroseconds(d/ROBOT_SPEED_MS*1000000);
+  base_run(STOP);
+}
+
+
+void Base::base_turn_deg(side s, unsigned int a) {
+  float angle_rad = a* (3.14159)/180;
+
+  if(s == LEFT) {
+    motorL.motor_run(BACKWARD);
+    motorR.motor_run(FORWARD);
+    delayMicroseconds(angle_rad/ROBOT_ANGULAR_SPEED_DEGS*1000000);
+    motorL.motor_run(STOP);
+    motorR.motor_run(STOP);
+  }
+  else if(s == RIGHT) {
+    motorL.motor_run(FORWARD);
+    motorR.motor_run(BACKWARD);
+    delayMicroseconds(angle_rad/ROBOT_ANGULAR_SPEED_DEGS*1000000);
+    motorL.motor_run(STOP);
+    motorR.motor_run(STOP);
+  }
+}
+
+
+
+
 bool Base::base_proximity(unsigned int seuil) {
   return sensor.tof_proximity(seuil);
 }
@@ -183,6 +253,12 @@ void Base::base_print_param(void) {
 
 
 
+
+
+
+
+
+
 Base robot;
 
 
@@ -192,11 +268,16 @@ void setup() {
   Serial.println("Base start.");
 
   robot.base_init();
-  robot.base_run(FORWARD);
-  while(!robot.base_proximity()) {
-    robot.base_print_param();
-  }
-  robot.base_run(STOP);
+
+  // robot.base_run_m(FORWARD, 1);
+  robot.base_turn_deg(LEFT, 90);
+
+
+  // robot.base_run(FORWARD);
+  // while(!robot.base_proximity()) {
+  //   robot.base_print_param();
+  // }
+  // robot.base_run(STOP);
 }
 
 
