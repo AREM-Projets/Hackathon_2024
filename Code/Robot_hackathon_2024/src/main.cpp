@@ -19,7 +19,7 @@ TOF sur D4: SDA; D5: SCL
 
 #define ROBOT_SPEED_MS 0.1174 //robot speed in m/s
 #define ROBOT_WHEEL_SPACING_M 0.114 //robot space between wheels in m
-#define ROBOT_ANGLUAR_SPEED_COEF 0.95
+#define ROBOT_ANGLUAR_SPEED_COEF 0.95 //angular speed correction coefficient
 
 #define ROBOT_ANGULAR_SPEED_DEGS 2*ROBOT_SPEED_MS/ROBOT_WHEEL_SPACING_M * ROBOT_ANGLUAR_SPEED_COEF
 
@@ -270,7 +270,7 @@ void setup() {
   robot.base_init();
 
   // robot.base_run_m(FORWARD, 1);
-  robot.base_turn_deg(LEFT, 90);
+  robot.base_turn_deg(RIGHT, 90);
 
 
   // robot.base_run(FORWARD);
