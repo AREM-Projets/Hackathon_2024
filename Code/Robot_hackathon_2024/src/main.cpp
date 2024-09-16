@@ -143,7 +143,8 @@ class Base
 public:
   void base_init();
   void base_run(rundir dir);
-  bool base_proximity(unsigned int seuil = 20);
+  bool base_proximity(unsigned int seuil = 140);
+  void base_print_param(void);
 
 
 private:
@@ -172,6 +173,13 @@ bool Base::base_proximity(unsigned int seuil) {
 
 
 
+void Base::base_print_param(void) {
+  sensor.tof_print_measure();
+}
+
+
+
+
 
 
 
@@ -181,10 +189,13 @@ Base robot;
 void setup() {
 
   Serial.begin(9600);
+  Serial.println("Base start.");
 
   robot.base_init();
   robot.base_run(FORWARD);
-  while(!robot.base_proximity());
+  while(!robot.base_proximity()) {
+    robot.base_print_param();
+  }
   robot.base_run(STOP);
 }
 
