@@ -78,22 +78,20 @@ void Motor::motor_run(rundir dir) {
 }
 
 
-
-class Base
+class Tof
 {
 public:
-  void base_init();
-  void base_run(rundir dir);
+  void tof_init(void);
+  bool tof_proximity(unsigned int seuil);
+  void tof_print_measure(void);
 
 
 private:
-  Motor motorL;
-  Motor motorR;
   VL53L1X sensor;
 };
 
 
-void Base::base_init() {
+void Tof::tof_init(void) {
   pinMode(TOF_XSDN, OUTPUT);
   digitalWrite(TOF_XSDN, 0);
   pinMode(TOF_XSDN, INPUT);
@@ -118,10 +116,45 @@ void Base::base_init() {
   // inter-measurement period). This period should be at least as long as the
   // timing budget.
   sensor.startContinuous(200);
+}
 
 
 
 
+bool Tof::tof_proximity(unsigned int seuil) {
+  if(sensor.read() < seuil) return true;
+  else return false;
+}
+
+void Tof::tof_print_measure(void) {
+  Serial.print(sensor.read());
+  Serial.println(" mm");
+}
+
+
+
+
+
+
+
+
+class Base
+{
+public:
+  void base_init();
+  void base_run(rundir dir);
+  bool base_proximity(unsigned int seuil = 20);
+
+
+private:
+  Motor motorL;
+  Motor motorR;
+  Tof sensor;
+};
+
+
+void Base::base_init() {
+  sensor.tof_init();
   motorL.motor_init(LEFT);
   motorR.motor_init(RIGHT);
 }
@@ -133,12 +166,13 @@ void Base::base_run(rundir dir) {
   motorR.motor_run(dir);
 }
 
-// void init_tof(VL53L1X& sensor);
+bool Base::base_proximity(unsigned int seuil) {
+  return sensor.tof_proximity(seuil);
+}
 
-// prototypes des fonctions de navigation:
-// void set_speed(float speed);
-// void set_position(float posx);
-// void set_angle(float angle);
+
+
+
 
 
 Base robot;
@@ -149,17 +183,13 @@ void setup() {
   Serial.begin(9600);
 
   robot.base_init();
-  robot.base_run(BACKWARD);
-  
-  
-
+  robot.base_run(FORWARD);
+  while(!robot.base_proximity());
+  robot.base_run(STOP);
 }
 
 
 void loop()
 {
-  // Serial.print(sensor.read());
-
-  // Serial.println();
 }
 
