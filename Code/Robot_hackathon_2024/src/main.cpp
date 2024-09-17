@@ -6,6 +6,7 @@ TOF sur D4: SDA; D5: SCL
 #include <Servo.h>
 #include <Wire.h>
 #include <VL53L1X.h>
+#include <math.h>
 
 #define TOF_XSDN D3
 
@@ -155,6 +156,7 @@ bool Tof::tof_proximity(unsigned int seuil) {
 }
 
 void Tof::tof_print_measure(void) {
+  Serial.print("Proximity: ");
   Serial.print(sensor.read());
   Serial.println(" mm");
 }
@@ -188,6 +190,11 @@ private:
   Motor motorL;
   Motor motorR;
   Tof sensor;
+
+  // theorical position values
+  float posx_th;
+  float posy_th;
+  float angle_th;
 };
 
 
@@ -195,11 +202,17 @@ void Base::base_init() {
   sensor.tof_init();
   motorL.motor_init(LEFT);
   motorR.motor_init(RIGHT);
+
+  // positioning system initialisation
+  posx_th = 0;
+  posy_th = 0;
+  angle_th =0;
 }
 
 
 
 void Base::base_run(rundir dir) {
+  /*to be deleted*/
   motorL.motor_run(dir);
   motorR.motor_run(dir);
 }
@@ -212,11 +225,18 @@ void Base::base_run_m(rundir dir, float d) {
   base_run(dir);
   delayMicroseconds(d/ROBOT_SPEED_MS*1000000);
   base_run(STOP);
+
+  // update position
+  posx_th += d*cos(angle_th);
+  posy_th += d*sin(angle_th);
+
 }
 
 
 void Base::base_turn_deg(side s, unsigned int a) {
   float angle_rad = a* (3.14159)/180;
+  if(s == LEFT) angle_th += angle_rad;
+  else if(s == RIGHT) angle_th -= angle_rad; 
 
   if(s == LEFT) {
     motorL.motor_run(BACKWARD);
@@ -245,6 +265,15 @@ bool Base::base_proximity(unsigned int seuil) {
 
 void Base::base_print_param(void) {
   sensor.tof_print_measure();
+  Serial.print("posx_th: ");
+  Serial.print(posx_th);
+  Serial.println(" m");
+  Serial.print("posy_th: ");
+  Serial.print(posy_th);
+  Serial.println(" m");
+  Serial.print("Angle: ");
+  Serial.print(angle_th * 180 / (3.14159));
+  Serial.println(" °");
 }
 
 
@@ -271,7 +300,7 @@ void setup() {
 
   // robot.base_run_m(FORWARD, 1);
   robot.base_turn_deg(RIGHT, 90);
-
+  robot.base_run_m(FORWARD, 1);
 
   // robot.base_run(FORWARD);
   // while(!robot.base_proximity()) {
@@ -283,5 +312,6 @@ void setup() {
 
 void loop()
 {
+  robot.base_print_param();
 }
 
