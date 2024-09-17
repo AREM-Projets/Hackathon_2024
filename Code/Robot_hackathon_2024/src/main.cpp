@@ -191,17 +191,26 @@ private:
   Motor motorR;
   Tof sensor;
 
+  // motors variables
+  unsigned long motors_start_time;
+  bool motors_on;
+
   // theorical position values
-  float posx_th;
-  float posy_th;
-  float angle_th;
+  float posx_th; //m
+  float posy_th; //m
+  float angle_th; //rad
 };
 
 
 void Base::base_init() {
+
+  // sensor init
   sensor.tof_init();
+
+  // motors init
   motorL.motor_init(LEFT);
   motorR.motor_init(RIGHT);
+  motors_on = false;
 
   // positioning system initialisation
   posx_th = 0;
@@ -212,9 +221,33 @@ void Base::base_init() {
 
 
 void Base::base_run(rundir dir) {
-  /*to be deleted*/
-  motorL.motor_run(dir);
-  motorR.motor_run(dir);
+  if(dir != STOP) {
+    motors_on = true;
+    
+    motorL.motor_run(dir);
+    motorR.motor_run(dir);
+
+    motors_start_time = millis();
+  }
+  else if(dir == STOP && motors_on){
+    
+
+    motorL.motor_run(dir);
+    motorR.motor_run(dir);
+    motors_on = false;
+
+    // distance travelled calculation
+    unsigned long t = (millis() - motors_start_time) / 1000; // motors running time in seconds
+    //Serial.println(t);
+    float dist = ROBOT_SPEED_MS * t; // travelled distance in meters
+    // Serial.println(dist);
+
+
+    posx_th += dist*cos(angle_th);
+    posy_th += dist*sin(angle_th);
+
+
+  }
 }
 
 
@@ -274,6 +307,8 @@ void Base::base_print_param(void) {
   Serial.print("Angle: ");
   Serial.print(angle_th * 180 / (3.14159));
   Serial.println(" °");
+
+  Serial.println();
 }
 
 
@@ -299,19 +334,21 @@ void setup() {
   robot.base_init();
 
   // robot.base_run_m(FORWARD, 1);
-  robot.base_turn_deg(RIGHT, 90);
-  robot.base_run_m(FORWARD, 1);
+  robot.base_turn_deg(LEFT, 90);
+  // robot.base_run_m(FORWARD, 1);
 
-  // robot.base_run(FORWARD);
-  // while(!robot.base_proximity()) {
-  //   robot.base_print_param();
-  // }
-  // robot.base_run(STOP);
+
+  robot.base_run(FORWARD);
+  while(!robot.base_proximity()) {
+    robot.base_print_param();
+  }
+  robot.base_run(STOP);
+  robot.base_print_param();
 }
 
 
 void loop()
 {
-  robot.base_print_param();
+  
 }
 
