@@ -48,8 +48,8 @@ typedef enum {FORWARD, BACKWARD, STOP} rundir;
 class Motor
 {
 public:
-  void motor_init(side s);
-  void motor_run(rundir dir);
+  void init(side s);
+  void run(rundir dir);
 
 
 private:
@@ -61,7 +61,7 @@ private:
 };
 
 
-void Motor::motor_init(side s) {
+void Motor::init(side s) {
   motor_side = s;
 
   if(s == LEFT) {
@@ -78,7 +78,7 @@ void Motor::motor_init(side s) {
   }
 }
 
-void Motor::motor_run(rundir dir) {
+void Motor::run(rundir dir) {
   if(dir == FORWARD) {
     if(motor_side == LEFT) motor_port.writeMicroseconds(motor_forward_stop + motor_speed_range - 7);
     else if(motor_side == RIGHT) motor_port.writeMicroseconds(motor_forward_stop - motor_speed_range);
@@ -112,9 +112,9 @@ void Motor::motor_run(rundir dir) {
 class Tof
 {
 public:
-  void tof_init(void);
-  bool tof_proximity(unsigned int seuil);
-  void tof_print_measure(void);
+  void init(void);
+  bool proximity(unsigned int seuil);
+  void print_measure(void);
 
 
 private:
@@ -122,14 +122,13 @@ private:
 };
 
 
-void Tof::tof_init(void) {
+void Tof::init(void) {
   pinMode(TOF_XSDN, OUTPUT);
   digitalWrite(TOF_XSDN, 0);
   pinMode(TOF_XSDN, INPUT);
   
   
-  while (!Serial) {}
-  Serial.begin(9600);
+  
   Wire.begin();
   Wire.setClock(400000); // use 400 kHz I2C
 
@@ -150,12 +149,12 @@ void Tof::tof_init(void) {
 }
 
 
-bool Tof::tof_proximity(unsigned int seuil) {
+bool Tof::proximity(unsigned int seuil) {
   if(sensor.read() < seuil) return true;
   else return false;
 }
 
-void Tof::tof_print_measure(void) {
+void Tof::print_measure(void) {
   Serial.print("Proximity: ");
   Serial.print(sensor.read());
   Serial.println(" mm");
@@ -178,19 +177,20 @@ void Tof::tof_print_measure(void) {
 class Base
 {
 public:
-  void base_init();
-  void base_run(rundir dir);
-  bool base_proximity(unsigned int seuil = 140);
-  void base_print_param(void);
-  void base_run_m(rundir dir, float d);
-  void base_turn_deg(side s, unsigned int a);
+  void init();
+  void run(rundir dir);
+  bool proximity(unsigned int seuil = 140);
+  void print_param(void);
+  void run_m(rundir dir, float d);
+  void turn_deg(side s, unsigned int a);
+
+  Tof sensor;
 
 
 private:
   Motor motorL;
   Motor motorR;
-  Tof sensor;
-
+  
   // motors variables
   unsigned long motors_start_time;
   bool motors_on;
@@ -202,14 +202,14 @@ private:
 };
 
 
-void Base::base_init() {
+void Base::init() {
 
   // sensor init
-  sensor.tof_init();
+  sensor.init();
 
   // motors init
-  motorL.motor_init(LEFT);
-  motorR.motor_init(RIGHT);
+  motorL.init(LEFT);
+  motorR.init(RIGHT);
   motors_on = false;
 
   // positioning system initialisation
@@ -220,20 +220,20 @@ void Base::base_init() {
 
 
 
-void Base::base_run(rundir dir) {
+void Base::run(rundir dir) {
   if(dir != STOP) {
     motors_on = true;
     
-    motorL.motor_run(dir);
-    motorR.motor_run(dir);
+    motorL.run(dir);
+    motorR.run(dir);
 
     motors_start_time = millis();
   }
   else if(dir == STOP && motors_on){
     
 
-    motorL.motor_run(dir);
-    motorR.motor_run(dir);
+    motorL.run(dir);
+    motorR.run(dir);
     motors_on = false;
 
     // distance travelled calculation
@@ -252,12 +252,12 @@ void Base::base_run(rundir dir) {
 
 
 
-void Base::base_run_m(rundir dir, float d) {
+void Base::run_m(rundir dir, float d) {
   /*Warning: this method is blocking*/
 
-  base_run(dir);
+  run(dir);
   delayMicroseconds(d/ROBOT_SPEED_MS*1000000);
-  base_run(STOP);
+  run(STOP);
 
   // update position
   posx_th += d*cos(angle_th);
@@ -266,38 +266,38 @@ void Base::base_run_m(rundir dir, float d) {
 }
 
 
-void Base::base_turn_deg(side s, unsigned int a) {
+void Base::turn_deg(side s, unsigned int a) {
   float angle_rad = a* (3.14159)/180;
   if(s == LEFT) angle_th += angle_rad;
   else if(s == RIGHT) angle_th -= angle_rad; 
 
   if(s == LEFT) {
-    motorL.motor_run(BACKWARD);
-    motorR.motor_run(FORWARD);
+    motorL.run(BACKWARD);
+    motorR.run(FORWARD);
     delayMicroseconds(angle_rad/ROBOT_ANGULAR_SPEED_DEGS*1000000);
-    motorL.motor_run(STOP);
-    motorR.motor_run(STOP);
+    motorL.run(STOP);
+    motorR.run(STOP);
   }
   else if(s == RIGHT) {
-    motorL.motor_run(FORWARD);
-    motorR.motor_run(BACKWARD);
+    motorL.run(FORWARD);
+    motorR.run(BACKWARD);
     delayMicroseconds(angle_rad/ROBOT_ANGULAR_SPEED_DEGS*1000000);
-    motorL.motor_run(STOP);
-    motorR.motor_run(STOP);
+    motorL.run(STOP);
+    motorR.run(STOP);
   }
 }
 
 
 
 
-bool Base::base_proximity(unsigned int seuil) {
-  return sensor.tof_proximity(seuil);
+bool Base::proximity(unsigned int seuil) {
+  return sensor.proximity(seuil);
 }
 
 
 
-void Base::base_print_param(void) {
-  sensor.tof_print_measure();
+void Base::print_param(void) {
+  sensor.print_measure();
   Serial.print("posx_th: ");
   Serial.print(posx_th);
   Serial.println(" m");
@@ -328,27 +328,30 @@ Base robot;
 
 void setup() {
 
-  Serial.begin(9600);
-  Serial.println("Base start.");
-
-  robot.base_init();
-
-  // robot.base_run_m(FORWARD, 1);
-  robot.base_turn_deg(LEFT, 90);
-  // robot.base_run_m(FORWARD, 1);
+  while (!Serial) {}
+  Serial.begin(9600); // a mettre la ou il y a des Serial.print dans les classes
 
 
-  robot.base_run(FORWARD);
-  while(!robot.base_proximity()) {
-    robot.base_print_param();
-  }
-  robot.base_run(STOP);
-  robot.base_print_param();
+  robot.init();
+
 }
 
 
 void loop()
 {
+  robot.run(FORWARD);
+
+  while(!robot.proximity()) {
+    robot.print_param();
+  }
+
+  robot.run(STOP);
+  while(robot.proximity()) {
+    robot.turn_deg(LEFT, 90);
+  }
+
+  
+  robot.print_param();
   
 }
 
