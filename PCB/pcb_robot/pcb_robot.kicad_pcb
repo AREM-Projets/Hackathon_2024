@@ -6033,7 +6033,7 @@
 		(descr "SMD capacitor, aluminum electrolytic nonpolar, 6.3x7.7mm")
 		(tags "capacitor electrolyic nonpolar")
 		(property "Reference" "C1"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(uuid "5c258dab-5727-4041-a969-7607b75ce17e")
 			(effects
@@ -6044,7 +6044,7 @@
 			)
 		)
 		(property "Value" "C"
-			(at 0 4.35 360)
+			(at 0 4.35 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "edeffa08-5c45-4f7b-99de-5f494bec6202")
@@ -6427,7 +6427,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor handsolder")
 		(property "Reference" "R1"
-			(at 0 -3.5 360)
+			(at 0 -3.5 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "fdaaf152-e1f0-47ec-ab0d-9612bcc78ec0")
@@ -6439,7 +6439,7 @@
 			)
 		)
 		(property "Value" "R"
-			(at 0 1.43 360)
+			(at 0 1.43 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "eff93fc1-5dc3-4cb6-a656-212dcd2d5b96")
@@ -6595,7 +6595,7 @@
 			(uuid "5365e703-7e18-4642-a8ca-0208e7863625")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "563a7edb-288f-4e2f-9a51-ca236004ae62")
 			(effects
@@ -6885,6 +6885,18 @@
 		(at 166 60 270)
 		(layer "F.SilkS")
 		(uuid "444e7ae9-4cc3-49d6-a4f6-ef9ca8219363")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "_/ _"
+		(at 164.441355 100.3496 0)
+		(layer "F.SilkS")
+		(uuid "4743eda4-bdc6-4885-800f-87bead9e4693")
 		(effects
 			(font
 				(size 1 1)
