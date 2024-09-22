@@ -34,7 +34,7 @@ void loop()
 
   robot.run(STOP);
   while(robot.proximity()) {
-    robot.turn_deg(LEFT, 20);
+    robot.turn_deg(LEFT, 30);
   }
 
   
