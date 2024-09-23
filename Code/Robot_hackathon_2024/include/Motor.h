@@ -2,9 +2,12 @@
 #include "Constants.h"
 #include "Servo.h"
 
+
+
 /*Classes*/
 class Motor
 {
+  /*Classe pour definir les methodes pour controller les moteurs à rotation continue du robot hackathon*/
 public:
   void init(side s);
   void run(rundir dir);

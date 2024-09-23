@@ -1,3 +1,8 @@
+/*
+C'est dans ce fichier que les constantes pour régler les moteurs doivent être saisies
+*/
+
+
 #pragma once
 
 #define TOF_XSDN D3

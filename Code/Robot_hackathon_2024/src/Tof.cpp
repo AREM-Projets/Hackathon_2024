@@ -33,11 +33,13 @@ void Tof::init(void) {
 
 
 bool Tof::proximity(unsigned int seuil) {
+  /*Renvoie le resultat du test de proximite d'un objet avec le robot*/
   if(sensor.read() < seuil) return true;
   else return false;
 }
 
 void Tof::print_measure(void) {
+  /**/
   Serial.print("Proximity: ");
   Serial.print(sensor.read());
   Serial.println(" mm");

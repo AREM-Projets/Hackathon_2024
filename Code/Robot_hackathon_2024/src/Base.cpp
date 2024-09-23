@@ -24,6 +24,10 @@ void Base::init() {
 
 
 void Base::run(rundir dir) {
+  /*Fait rouler en ligne droite le robot dans le sens (avant / arriere) voulu.
+  Permet aussi d'arreter le robot via STOP. Cette fonction, comme les autres fonctions de deplacement,
+  Met a jour la position theorique du robot (duree de deplacement * vitesse)*/
+
   if(dir != STOP) {
     motors_on = true;
     
@@ -56,6 +60,7 @@ void Base::run(rundir dir) {
 
 
 void Base::run_m(rundir dir, float d) {
+  /*Fait avancer le robot d'une distance en metres donnee*/
   /*Warning: this method is blocking*/
 
   run(dir);
@@ -94,6 +99,7 @@ void Base::turn_deg(side s, unsigned int a) {
 
 
 bool Base::proximity(unsigned int seuil) {
+  /*Encapsulation de la methode de proximite de la classe Tof*/
   return sensor.proximity(seuil);
 }
 

@@ -4,6 +4,7 @@
 
 
 void Motor::init(side s) {
+  /*Initialise le moteur a rotation continue en fonction de son cote sur le chassis*/
   motor_side = s;
 
   if(s == LEFT) {
@@ -21,6 +22,7 @@ void Motor::init(side s) {
 }
 
 void Motor::run(rundir dir) {
+  /*Fait tourner le moteur dans la direction souhaitee en fonction du cote du moteur sur le chassis de manière infinie*/
   if(dir == FORWARD) {
     if(motor_side == LEFT) motor_port.writeMicroseconds(motor_forward_stop + motor_speed_range - 7);
     else if(motor_side == RIGHT) motor_port.writeMicroseconds(motor_forward_stop - motor_speed_range);
