@@ -28,7 +28,6 @@ Marche arrière: 85 - 88
 
 
 
-void init_tof(VL53L1X& sensor);
 void init_base(Servo& motorL, Servo& motorR);
 
 // prototypes des fonctions de navigation:
@@ -36,7 +35,6 @@ void init_base(Servo& motorL, Servo& motorR);
 // void set_position(float posx);
 // void set_angle(float angle);
 
-VL53L1X sensor;
 Servo motorL;
 Servo motorR;
 
@@ -46,7 +44,6 @@ Servo motorR;
 void setup() {
 
   init_base(motorL, motorR);
-  init_tof(sensor);
 
 
  
@@ -58,50 +55,14 @@ void setup() {
 
 void loop()
 {
-  Serial.print(sensor.read());
 
-  Serial.println();
 
 
 }
-
-
-
-
-
-
 
 
 
 void init_base(Servo& motorL, Servo& motorR) {
   motorR.attach(A0);
   motorL.attach(A1);
-}
-
-void init_tof(VL53L1X& sensor) {
-  pinMode(TOF_XSDN, OUTPUT);
-  digitalWrite(TOF_XSDN, 0);
-  pinMode(TOF_XSDN, INPUT);
-  
-  
-  while (!Serial) {}
-  Serial.begin(9600);
-  Wire.begin();
-  Wire.setClock(400000); // use 400 kHz I2C
-
-  sensor.setTimeout(500);
-  if (!sensor.init())
-  {
-    Serial.println("Failed to detect and initialize sensor!");
-    while (1);
-  }
-
-  sensor.setDistanceMode(VL53L1X::Long);
-  sensor.setMeasurementTimingBudget(50000);
-
-  // Start continuous readings at a rate of one measurement every 50 ms (the
-  // inter-measurement period). This period should be at least as long as the
-  // timing budget.
-  sensor.startContinuous(200);
-
 }
