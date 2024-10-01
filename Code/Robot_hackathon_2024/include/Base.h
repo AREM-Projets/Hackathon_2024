@@ -10,10 +10,14 @@ class Base
 public:
   void init();
   void run(rundir dir);
+  void stop(void);
   bool proximity(unsigned int seuil = 140);
   void print_param(void);
   void run_m(rundir dir, float d);
   void turn_deg(side s, unsigned int a);
+  float get_posx(void);
+  float get_posy(void);
+  float get_angle(void);
 
   Tof sensor;
 

@@ -58,6 +58,11 @@ void Base::run(rundir dir) {
 }
 
 
+void Base::stop(void)
+{
+  run(STOP);
+}
+
 
 void Base::run_m(rundir dir, float d) {
   /*Fait avancer le robot d'une distance en metres donnee*/
@@ -120,3 +125,45 @@ void Base::print_param(void) {
   Serial.println();
 }
 
+
+float Base::get_posx(void)
+{
+  if(motors_on)
+  {
+    // distance travelled calculation
+    unsigned long t = (millis() - motors_start_time) / 1000; // motors running time in seconds
+    //Serial.println(t);
+    float dist = ROBOT_SPEED_MS * t; // travelled distance in meters
+    // Serial.println(dist);
+
+
+    posx_th += dist*cos(angle_th); //mise a jour de la position si on est en train de rouler
+  }
+  // si on est pas en train de rouler, cela veut dire qu'on a deja calcule la position lors du stop et on peut juste renvoyer la position
+  return posx_th;
+  
+}
+
+
+float Base::get_posy(void)
+{
+  if(motors_on)
+  {
+    // distance travelled calculation
+    unsigned long t = (millis() - motors_start_time) / 1000; // motors running time in seconds
+    //Serial.println(t);
+    float dist = ROBOT_SPEED_MS * t; // travelled distance in meters
+    // Serial.println(dist);
+
+
+    posy_th += dist*sin(angle_th);
+  }
+  
+  return posy_th;
+  
+}
+
+float Base::get_angle(void)
+{
+  return angle_th;
+}
