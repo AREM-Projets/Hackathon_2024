@@ -13,3 +13,8 @@ Dépôt pour le projet Hackathon 2024
 ## Obstacles / Points délicats
 
 * Passage sur STM32CubeIde complexe à envisager bien qu'il soit préférable. En effet l'utilisation d'un tof avec CubeIde est à creuser. Bof pour le capteur ultrasons (il voit moins loin et est moins fiable). Pour le TOF, la communication I2C est intéressante.
+
+
+
+## Matériel
+* https://www.amazon.fr/dp/B0D2VLSMZZ/ref=sspa_dk_hqp_detail_aax_0?sp_csd=d2lkZ2V0TmFtZT1zcF9ocXBfc2hhcmVk&th=1
