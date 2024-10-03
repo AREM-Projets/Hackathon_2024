@@ -21,29 +21,33 @@ void setup() {
 
   robot.init();
 
-
-  robot.run(FORWARD);
-  while(robot.get_posx() < 100);
-  robot.turn_deg(LEFT, 90);
-  robot.stop();
+  //test de roulage en distance
+  // robot.run(FORWARD);
+  // while(robot.get_posx() < 100);
+  // robot.turn_deg(LEFT, 90);
+  // robot.stop();
 }
 
 
 void loop()
 {
-  // robot.run(FORWARD);
+  robot.run(FORWARD);
 
-  // while(!robot.proximity()) {
-  //   robot.print_param();
-  // }
+  while(!robot.proximity()) {
+    robot.print_param();
+  }
 
-  // robot.run(STOP);
-  // while(robot.proximity()) {
-  //   robot.turn_deg(LEFT, 30);
-  // }
+  robot.run(STOP);
+  delay(500);
+  robot.run(BACKWARD);
+  delay(200);
+  robot.stop();
+  while(robot.proximity()) {
+    robot.turn_deg(LEFT, 20);
+  }
 
   
-  // robot.print_param();
+  robot.print_param();
   
 }
 
