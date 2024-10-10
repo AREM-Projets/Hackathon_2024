@@ -1,0 +1,70 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.8 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.8">
+  <diagram name="Page-1" id="Sb7PwAg5q5nFfLubSxCT">
+    <mxGraphModel dx="863" dy="505" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pmAQF5X93hOQwkMNedfC-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="pmAQF5X93hOQwkMNedfC-2" target="pmAQF5X93hOQwkMNedfC-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="pmAQF5X93hOQwkMNedfC-2" target="pmAQF5X93hOQwkMNedfC-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="225" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-2" value="&lt;div&gt;Unité de traitement:&lt;/div&gt;STM32L432KC" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="130" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="pmAQF5X93hOQwkMNedfC-3" target="pmAQF5X93hOQwkMNedfC-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-3" value="&lt;div&gt;Alimentation:&lt;/div&gt;Batterie portable" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="60" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="pmAQF5X93hOQwkMNedfC-4" target="pmAQF5X93hOQwkMNedfC-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-4" value="Convertisseur:&lt;div&gt;&lt;/div&gt;&lt;div&gt;Moteurs&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="60" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-8" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="80" as="sourcePoint" />
+            <mxPoint x="490" y="80" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-9" value="LEDs Equipe&lt;div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="200" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="pmAQF5X93hOQwkMNedfC-11" target="pmAQF5X93hOQwkMNedfC-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-11" value="Bouton equipe&lt;div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="130" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pmAQF5X93hOQwkMNedfC-13" target="pmAQF5X93hOQwkMNedfC-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="80" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-13" value="Bouton ON/OFF&lt;div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="60" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="pmAQF5X93hOQwkMNedfC-16" target="pmAQF5X93hOQwkMNedfC-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-16" value="Capteur de distance TOF&lt;div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="200" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pmAQF5X93hOQwkMNedfC-18" value="Roues" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="60" width="120" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
