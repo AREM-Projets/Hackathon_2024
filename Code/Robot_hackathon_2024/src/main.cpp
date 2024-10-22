@@ -29,7 +29,7 @@ void setup() {
   }
   else
   {
-    digitalWrite(D10, 0);
+    digitalWrite(D10, 0); 
     digitalWrite(D11, 1);
   }
   
