@@ -14,43 +14,41 @@ Base robot;
 
 
 void setup() {
-  pinMode(D13, INPUT_PULLUP);
-  pinMode(D10, OUTPUT);
-  pinMode(D11, OUTPUT);
+
+  // initialisation du bouton équipe et des leds
+  pinMode(BOUTON_EQUIPE, INPUT_PULLUP);
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+
+
+  // initialisation de la connexion usb
+  while (!Serial) {}
+  Serial.begin(9600);
 
   
 
+  
+  
 
-  if(digitalRead(D13))
+  // Allumage LED equipe
+  if(digitalRead(BOUTON_EQUIPE))
   {
-    
-    digitalWrite(D10, 1);
-    digitalWrite(D11, 0);
+    digitalWrite(LED1, 1);
+    digitalWrite(LED2, 0);
   }
   else
   {
-    digitalWrite(D10, 0); 
-    digitalWrite(D11, 1);
+    digitalWrite(LED1, 0); 
+    digitalWrite(LED2, 1);
   }
   
   
   
 
-  while (!Serial) {}
-  Serial.begin(9600); // a mettre la ou il y a des Serial.print dans les classes
-
-
-  robot.init();
-
-
   
 
 
-  //test de roulage en distance
-  // robot.run(FORWARD);
-  // while(robot.get_posx() < 100);
-  // robot.turn_deg(LEFT, 90);
-  // robot.stop();
+  robot.init();
 }
 
 

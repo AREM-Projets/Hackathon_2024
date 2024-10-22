@@ -21,7 +21,9 @@ C'est dans ce fichier que les constantes pour régler les moteurs doivent être 
 
 #define ROBOT_ANGULAR_SPEED_DEGS 2*ROBOT_SPEED_MS/ROBOT_WHEEL_SPACING_M * ROBOT_ANGLUAR_SPEED_COEF
 
-
+#define LED1 D10
+#define LED2 D11
+#define BOUTON_EQUIPE D13
 
 typedef enum {LEFT, RIGHT} side;
 typedef enum {FORWARD, BACKWARD, STOP} rundir;
