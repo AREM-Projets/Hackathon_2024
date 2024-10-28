@@ -13,7 +13,7 @@ void Base::init() {
   // motors init
   motorL.init(LEFT);
   motorR.init(RIGHT);
-  motors_on = false;
+  motors_on = STOP;
 
   // positioning system initialisation
   posx_th = 0;
@@ -29,19 +29,19 @@ void Base::run(rundir dir) {
   Met a jour la position theorique du robot (duree de deplacement * vitesse)*/
 
   if(dir != STOP) {
-    motors_on = true;
+    motors_on = dir;
     
     motorL.run(dir);
     motorR.run(dir);
 
     motors_start_time = millis();
   }
-  else if(dir == STOP && motors_on){
+  else if(dir == STOP && motors_on != STOP){
     
 
     motorL.run(dir);
     motorR.run(dir);
-    motors_on = false;
+    
 
     // distance travelled calculation
     unsigned long t = (millis() - motors_start_time) / 1000; // motors running time in seconds
@@ -50,10 +50,18 @@ void Base::run(rundir dir) {
     // Serial.println(dist);
 
 
-    posx_th += dist*cos(angle_th);
-    posy_th += dist*sin(angle_th);
+    if(motors_on == FORWARD) 
+    {
+      posx_th += dist*cos(angle_th);
+      posy_th += dist*sin(angle_th);
+    }
+    if(motors_on == BACKWARD)
+    {
+      posx_th -= dist*cos(angle_th);
+      posy_th -= dist*sin(angle_th);
+    }
 
-
+    motors_on = STOP;
   }
 }
 
@@ -79,22 +87,29 @@ void Base::run_m(rundir dir, float d) {
 }
 
 
-void Base::turn_deg(side s, unsigned int a) {
-  float angle_rad = a* (3.14159)/180;
-  if(s == LEFT) angle_th += angle_rad;
-  else if(s == RIGHT) angle_th -= angle_rad; 
+void Base::turn_rad(float angle_rad) {
+  side s;
+
+
+  
+  angle_th += angle_rad;
+
+
+  if(angle_rad > 0) s = RIGHT;
+  else s = LEFT;
+
 
   if(s == LEFT) {
     motorL.run(BACKWARD);
     motorR.run(FORWARD);
-    delayMicroseconds(angle_rad/ROBOT_ANGULAR_SPEED_DEGS*1000000);
+    delayMicroseconds(-angle_rad/ROBOT_ANGULAR_SPEED_RADS*1000000);
     motorL.run(STOP);
     motorR.run(STOP);
   }
   else if(s == RIGHT) {
     motorL.run(FORWARD);
     motorR.run(BACKWARD);
-    delayMicroseconds(angle_rad/ROBOT_ANGULAR_SPEED_DEGS*1000000);
+    delayMicroseconds(angle_rad/ROBOT_ANGULAR_SPEED_RADS*1000000);
     motorL.run(STOP);
     motorR.run(STOP);
   }
@@ -113,13 +128,13 @@ bool Base::proximity(unsigned int seuil) {
 void Base::print_param(void) {
   sensor.print_measure();
   Serial.print("posx_th: ");
-  Serial.print(posx_th);
+  Serial.print(get_posx());
   Serial.println(" m");
   Serial.print("posy_th: ");
-  Serial.print(posy_th);
+  Serial.print(get_posy());
   Serial.println(" m");
   Serial.print("Angle: ");
-  Serial.print(angle_th * 180 / (3.14159));
+  Serial.print(get_angle() * 180 / (3.14159));
   Serial.println(" °");
 
   Serial.println();
@@ -128,26 +143,34 @@ void Base::print_param(void) {
 
 float Base::get_posx(void)
 {
-  if(motors_on)
+  float dist = 0;
+
+
+  if(motors_on != STOP)
   {
     // distance travelled calculation
     unsigned long t = (millis() - motors_start_time) / 1000; // motors running time in seconds
     //Serial.println(t);
-    float dist = ROBOT_SPEED_MS * t; // travelled distance in meters
+    dist = ROBOT_SPEED_MS * t; // travelled distance in meters
     // Serial.println(dist);
 
 
-    posx_th += dist*cos(angle_th); //mise a jour de la position si on est en train de rouler
+    // posx_th += dist*cos(angle_th); //mise a jour de la position si on est en train de rouler
   }
   // si on est pas en train de rouler, cela veut dire qu'on a deja calcule la position lors du stop et on peut juste renvoyer la position
-  return posx_th;
   
+  if(motors_on == FORWARD) return posx_th + dist*cos(angle_th);
+  else if(motors_on == BACKWARD) return posx_th - dist*cos(angle_th);
+  else return posx_th;
+
 }
 
 
 float Base::get_posy(void)
 {
-  if(motors_on)
+  float dist = 0;
+
+  if(motors_on != STOP)
   {
     // distance travelled calculation
     unsigned long t = (millis() - motors_start_time) / 1000; // motors running time in seconds
@@ -156,14 +179,23 @@ float Base::get_posy(void)
     // Serial.println(dist);
 
 
-    posy_th += dist*sin(angle_th);
+    // posy_th += dist*sin(angle_th);
   }
   
-  return posy_th;
-  
+  if(motors_on == FORWARD) return posy_th + dist*sin(angle_th);
+  else if(motors_on == BACKWARD) return posy_th - dist*sin(angle_th);
+  else return posy_th;
 }
 
 float Base::get_angle(void)
 {
   return angle_th;
+}
+
+
+
+
+rundir Base::get_motors_status(void)
+{
+  return motors_on;
 }

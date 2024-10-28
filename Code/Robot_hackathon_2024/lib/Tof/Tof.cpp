@@ -6,12 +6,6 @@
 
 
 void Tof::init(void) {
-  pinMode(TOF_XSDN, OUTPUT);
-  digitalWrite(TOF_XSDN, 0);
-  pinMode(TOF_XSDN, INPUT);
-  
-  
-  
   Wire.begin();
   Wire.setClock(400000); // use 400 kHz I2C
 

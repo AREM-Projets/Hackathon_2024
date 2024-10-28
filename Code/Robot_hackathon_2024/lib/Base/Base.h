@@ -14,10 +14,12 @@ public:
   bool proximity(unsigned int seuil = 140);
   void print_param(void);
   void run_m(rundir dir, float d);
-  void turn_deg(side s, unsigned int a);
+  void turn_rad(float angle_rad);
   float get_posx(void);
   float get_posy(void);
   float get_angle(void);
+
+  rundir get_motors_status(void);
 
   Tof sensor;
 
@@ -28,7 +30,7 @@ private:
   
   // motors variables
   unsigned long motors_start_time;
-  bool motors_on;
+  rundir motors_on;
 
   // theorical position values
   float posx_th; //m

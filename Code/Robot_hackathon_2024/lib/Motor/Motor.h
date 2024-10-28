@@ -16,7 +16,6 @@ public:
 private:
   Servo motor_port;
   unsigned int motor_side;
-  unsigned int motor_forward_stop;
-  unsigned int motor_backward_stop;
+  unsigned int motor_stop;
   unsigned int motor_speed_range;
 };
