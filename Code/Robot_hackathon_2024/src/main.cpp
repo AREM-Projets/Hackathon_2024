@@ -1,44 +1,28 @@
-/*
-TOF sur D4: SDA; D5: SCL
-*/
-
-
-#include "Base.h"
 #include "Arduino.h"
+#include "Base.h" //bibliotheque qui contient les fonctions pour controller le robot
 
 
-float DegToRad(float a)
-{
-  return(a * PI / 180);
-}
-
-float RadToDeg(float a)
-{
-  return(a * 180 / PI);
-}
-
-
+//on crees un objet robot. C'est un peu un jumeau virtuel du robot qui permet de le controller via des fonctions propres (methodes)
 Base robot;
 
-
 void setup() {
+  // initialisation de la connexion usb
+  while (!Serial) {}
+  Serial.begin(9600);
 
-  // initialisation du bouton équipe et des leds
+
+  // initialisation de l'embase du robot (capteur tof et moteurs)
+  robot.init();
+
+
+  // initialisation du bouton équipe et des leds equipe
   pinMode(BOUTON_EQUIPE, INPUT_PULLUP);
   pinMode(LED1, OUTPUT);
   pinMode(LED2, OUTPUT);
 
 
-  // initialisation de la connexion usb
-  while (!Serial) {}
-  Serial.begin(9600);
-
-  
-
-  
-  
-
-  // Allumage LED equipe
+  /*Code utilisateur 0*/
+  // Allumage LED equipe en fonction du bouton equipe
   if(digitalRead(BOUTON_EQUIPE))
   {
     digitalWrite(LED1, 1);
@@ -49,51 +33,28 @@ void setup() {
     digitalWrite(LED1, 0); 
     digitalWrite(LED2, 1);
   }
+  /*Fin code utilisateur 0*/
   
-  robot.init();
 
+  /*Code utilisateur 1*/
+  //exemple de code
+  robot.run(FORWARD);
 
-  // robot.run(FORWARD);
-
-  // while(robot.get_posx() < 1) {
-  //   robot.print_param();
-  // }
-
-  // robot.run(STOP);
-
-  // delay(1000);
-
-  robot.run(BACKWARD);
-
-
-  while(robot.get_posx() > -1) {
-    robot.print_param();
+  while(robot.get_posx() < 1) {
   }
 
   robot.stop();
-
-
-  // robot.turn_rad(DegToRad(180.0));
+  /*Fin code utilisateur 1*/
 }
 
 
 void loop()
 {
-  // robot.run(FORWARD);
+  /*Code utilisateur 2*/
 
-  // while(!robot.proximity()) {
-  //   robot.print_param();
-  // }
-
-  // robot.run(STOP);
-  // delay(500);
-  // robot.run(BACKWARD);
-  // delay(500);
-  // robot.stop();
-  // while(robot.proximity()) {
-  //   robot.turn_rad(DegToRad(20.0));
-  // }
-  
-  // robot.print_param();
+  /*Fin code utilisateur 2*/
 }
+
+
+
 

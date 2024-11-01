@@ -5,6 +5,17 @@
 
 
 
+float DegToRad(float a)
+{
+  return(a * PI / 180);
+}
+
+float RadToDeg(float a)
+{
+  return(a * 180 / PI);
+}
+
+
 void Base::init() {
 
   // sensor init

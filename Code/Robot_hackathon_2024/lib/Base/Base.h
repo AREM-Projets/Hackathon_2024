@@ -4,6 +4,9 @@
 #include "Tof.h"
 #include "Motor.h"
 
+float DegToRad(float a);
+float RadToDeg(float a);
+
 
 class Base
 {
@@ -11,9 +14,9 @@ public:
   void init();
   void run(rundir dir);
   void stop(void);
-  bool proximity(unsigned int seuil = 140);
+  bool proximity(unsigned int seuil = 140); // a modifier
   void print_param(void);
-  void run_m(rundir dir, float d);
+  void run_m(rundir dir, float d); //a modifier
   void turn_rad(float angle_rad);
   float get_posx(void);
   float get_posy(void);
