@@ -1,3 +1,9 @@
+/*
+Code de demo du robot hackathon AREM 2024
+Auteur: Antoine Chassaigne
+Date: 11/2024
+*/
+
 #include "Arduino.h"
 #include "Base.h" //bibliotheque qui contient les fonctions pour controller le robot
 
