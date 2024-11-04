@@ -5,17 +5,6 @@
 
 
 
-float DegToRad(float a)
-{
-  return(a * PI / 180);
-}
-
-float RadToDeg(float a)
-{
-  return(a * 180 / PI);
-}
-
-
 void Base::init() {
 
   // sensor init
@@ -39,7 +28,7 @@ void Base::run(rundir dir) {
   Permet aussi d'arreter le robot via STOP. Cette fonction, comme les autres fonctions de deplacement,
   Met a jour la position theorique du robot (duree de deplacement * vitesse)*/
 
-  if(dir != STOP) {
+  if(dir != STOP && motors_on == STOP) {
     motors_on = dir;
     
     motorL.run(dir);
@@ -57,10 +46,10 @@ void Base::run(rundir dir) {
     // distance travelled calculation
     unsigned long t = (millis() - motors_start_time) / 1000; // motors running time in seconds
     //Serial.println(t);
-    float dist = ROBOT_SPEED_MS * t; // travelled distance in meters
+    double dist = ROBOT_SPEED_MS * t; // travelled distance in meters
     // Serial.println(dist);
 
-
+    // update pos
     if(motors_on == FORWARD) 
     {
       posx_th += dist*cos(angle_th);
@@ -83,12 +72,14 @@ void Base::stop(void)
 }
 
 
-void Base::run_m(rundir dir, float d) {
+void Base::run_m(double d) {
   /*Fait avancer le robot d'une distance en metres donnee*/
   /*Warning: this method is blocking*/
+  if(d > 0) run(FORWARD);
+  else run(BACKWARD);
 
-  run(dir);
   delayMicroseconds(d/ROBOT_SPEED_MS*1000000);
+
   run(STOP);
 
   // update position
@@ -98,9 +89,8 @@ void Base::run_m(rundir dir, float d) {
 }
 
 
-void Base::turn_rad(float angle_rad) {
+void Base::turn_rad(double angle_rad) {
   side s;
-
 
   
   angle_th += angle_rad;
@@ -129,9 +119,9 @@ void Base::turn_rad(float angle_rad) {
 
 
 
-bool Base::proximity(unsigned int seuil) {
+bool Base::proximity(void) {
   /*Encapsulation de la methode de proximite de la classe Tof*/
-  return sensor.proximity(seuil);
+  return sensor.proximity();
 }
 
 
@@ -145,16 +135,16 @@ void Base::print_param(void) {
   Serial.print(get_posy());
   Serial.println(" m");
   Serial.print("Angle: ");
-  Serial.print(get_angle() * 180 / (3.14159));
+  Serial.print(get_angle() * RAD_TO_DEG);
   Serial.println(" °");
 
   Serial.println();
 }
 
 
-float Base::get_posx(void)
+double Base::get_posx(void)
 {
-  float dist = 0;
+  double dist = 0;
 
 
   if(motors_on != STOP)
@@ -166,39 +156,36 @@ float Base::get_posx(void)
     // Serial.println(dist);
 
 
-    // posx_th += dist*cos(angle_th); //mise a jour de la position si on est en train de rouler
   }
-  // si on est pas en train de rouler, cela veut dire qu'on a deja calcule la position lors du stop et on peut juste renvoyer la position
-  
+  // we do not update de position as we are still running
   if(motors_on == FORWARD) return posx_th + dist*cos(angle_th);
   else if(motors_on == BACKWARD) return posx_th - dist*cos(angle_th);
   else return posx_th;
-
 }
 
 
-float Base::get_posy(void)
+double Base::get_posy(void)
 {
-  float dist = 0;
+  double dist = 0;
 
   if(motors_on != STOP)
   {
     // distance travelled calculation
     unsigned long t = (millis() - motors_start_time) / 1000; // motors running time in seconds
     //Serial.println(t);
-    float dist = ROBOT_SPEED_MS * t; // travelled distance in meters
+    dist = ROBOT_SPEED_MS * t; // travelled distance in meters
     // Serial.println(dist);
+    // Serial.println();
+    // Serial.println(posy_th + dist*sin(angle_th));
 
-
-    // posy_th += dist*sin(angle_th);
   }
-  
+  // we do not update de position as we are still running
   if(motors_on == FORWARD) return posy_th + dist*sin(angle_th);
   else if(motors_on == BACKWARD) return posy_th - dist*sin(angle_th);
   else return posy_th;
 }
 
-float Base::get_angle(void)
+double Base::get_angle(void)
 {
   return angle_th;
 }

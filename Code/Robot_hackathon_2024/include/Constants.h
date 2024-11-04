@@ -12,10 +12,10 @@ C'est dans ce fichier que les constantes pour régler les moteurs doivent être 
 #define ROBOT_L_MOTOR_COEF 1 //speed coef for Left motor
 #define ROBOT_R_MOTOR_COEF 0.95 //speed coef for Right motor
 
-#define ROBOT_SPEED_COEF 0.9
-#define ROBOT_ANGLUAR_SPEED_COEF 1 //angular speed correction coefficient
+#define ROBOT_SPEED_COEF 0.95 //coefficient on the speed of the robot
+#define ROBOT_ANGLUAR_SPEED_COEF 0.87 //coefficient on the rotation speed of the robot
 
-
+//don't modify it
 #define MOTOR_G_STOP 1500
 #define MOTOR_G_SPEED_RANGE 500
 

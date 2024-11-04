@@ -26,10 +26,9 @@ void Tof::init(void) {
 }
 
 
-bool Tof::proximity(unsigned int seuil) {
-  /*Renvoie le resultat du test de proximite d'un objet avec le robot*/
-  if(sensor.read() < seuil) return true;
-  else return false;
+bool Tof::proximity(void) {
+  /*Renvoie la distance d'un objet avec le robot*/
+  return sensor.read();
 }
 
 void Tof::print_measure(void) {

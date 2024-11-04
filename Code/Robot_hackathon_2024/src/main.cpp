@@ -44,12 +44,19 @@ void setup() {
 
   /*Code utilisateur 1*/
   //exemple de code
+  robot.turn_rad(80*DEG_TO_RAD);
+
   robot.run(FORWARD);
 
-  while(robot.get_posx() < 1) {
+  while(robot.get_posy() < 1) {
+    robot.print_param();
   }
 
   robot.stop();
+
+  Serial.println();
+  robot.print_param();
+  
   /*Fin code utilisateur 1*/
 }
 
