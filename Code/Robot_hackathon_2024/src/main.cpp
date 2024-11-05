@@ -61,6 +61,9 @@ void loop()
 {
   /* Code utilisateur 2 */
 
+  // have fun !
+  // N'oubliez pas, comme l'a dit un grand homme : "Y'a un fichier il s'appelle README je me demande pourquoi."
+
   /* Fin code utilisateur 2 */
 }
 
