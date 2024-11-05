@@ -8,7 +8,7 @@ Date: 11/2024
 #include "Base.h" //bibliotheque qui contient les fonctions pour controller le robot
 
 
-//on crees un objet robot. C'est un peu un jumeau virtuel du robot qui permet de le controller via des fonctions propres (methodes)
+// On cree un objet robot. C'est un peu un jumeau virtuel du robot qui permet de le controller via des fonctions propres (methodes)
 Base robot;
 
 void setup() {
