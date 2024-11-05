@@ -25,6 +25,10 @@ void Tof::init(void) {
   _sensor.startContinuous(200);
 }
 
+void Tof::printDistance(void)
+{
+  Serial.printf("Sensor distance : %d\n", this->getDistance());
+}
 
 uint16_t Tof::getDistance(void) {
   /*Renvoie la distance d'un objet avec le robot*/

@@ -10,6 +10,7 @@ class Tof
 public:
   void init(void);
   uint16_t getDistance(void);
+  void printDistance(void);
 
 private:
   VL53L1X _sensor;

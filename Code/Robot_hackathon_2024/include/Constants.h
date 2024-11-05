@@ -3,7 +3,6 @@
  */
 
 #pragma once
-
 /********************************************************
  * Constantes modifiables
  *******************************************************/
@@ -39,4 +38,4 @@
 #define BOUTON_EQUIPE D13
 
 typedef enum {LEFT, RIGHT} side_t;
-typedef enum {FORWARD, BACKWARD, STOP} rundir_t;
+typedef enum {STOP = 0, FORWARD, BACKWARD} rundir_t;

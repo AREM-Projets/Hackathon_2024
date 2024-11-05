@@ -16,18 +16,15 @@ void setup() {
   while (!Serial) {}
   Serial.begin(9600);
 
-
   // initialisation de l'embase du robot (capteur tof et moteurs)
   robot.init();
-
 
   // initialisation du bouton équipe et des leds equipe
   pinMode(BOUTON_EQUIPE, INPUT_PULLUP);
   pinMode(LED1, OUTPUT);
   pinMode(LED2, OUTPUT);
 
-
-  /*Code utilisateur 0*/
+  /* Code utilisateur 0 */
   // Allumage LED equipe en fonction du bouton equipe
   if(digitalRead(BOUTON_EQUIPE))
   {
@@ -39,33 +36,32 @@ void setup() {
     digitalWrite(LED1, 0); 
     digitalWrite(LED2, 1);
   }
-  /*Fin code utilisateur 0*/
-  
+  /* Fin code utilisateur 0 */
 
-  /*Code utilisateur 1*/
+  /* Code utilisateur 1 */
   //exemple de code
-  robot.turn_rad(80*DEG_TO_RAD);
+  robot.turn(80*DEG_TO_RAD);
 
   robot.run(FORWARD);
 
-  while(robot.get_posy() < 1) {
-    robot.print_param();
+  while(robot.getPosY() < 1) {
+    robot.printParams();
   }
 
   robot.stop();
 
   Serial.println();
-  robot.print_param();
+  robot.printParams();
   
-  /*Fin code utilisateur 1*/
+  /* Fin code utilisateur 1 */
 }
 
 
 void loop()
 {
-  /*Code utilisateur 2*/
+  /* Code utilisateur 2 */
 
-  /*Fin code utilisateur 2*/
+  /* Fin code utilisateur 2 */
 }
 
 

@@ -19,19 +19,19 @@ public:
   void init();
 
   void run(rundir_t dir);
-  void run_m(double d);
-  void turn_rad(double angle_rad);
+  void runDistance(double dist_m);
+  void turn(double angle_rad);
   void stop(void);
   
   uint16_t getSensorDistance(void);
 
-  void print_param(void);
+  void printParams(void);
 
-  double get_posx(void);
-  double get_posy(void);
-  double get_angle(void);
+  double getPosX(void);
+  double getPosY(void);
+  double getAngle(void);
 
-  rundir_t get_motors_status(void);
+  rundir_t getMotorsStatus(void);
 
   
 
