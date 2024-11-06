@@ -9,13 +9,13 @@ class Motor
 {
   /*Classe pour definir les methodes pour controller les moteurs à rotation continue du robot hackathon*/
 public:
-  void init(side s);
-  void run(rundir dir);
+  void init(side_t side);
+  void run(rundir_t dir);
 
 
 private:
-  Servo motor_port;
-  unsigned int motor_side;
-  unsigned int motor_stop;
-  unsigned int motor_speed_range;
+  Servo _motor_port;
+  side_t _motor_side;
+  uint32_t _motor_stop;
+  uint32_t _motor_speed_range;
 };

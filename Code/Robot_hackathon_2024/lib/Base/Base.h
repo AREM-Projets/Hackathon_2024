@@ -18,35 +18,35 @@ class Base
 public:
   void init();
 
-  void run(rundir dir);
-  void run_m(double d);
-  void turn_rad(double angle_rad);
+  void run(rundir_t dir);
+  void runDistance(double dist_m);
+  void turn(double angle_rad);
   void stop(void);
   
-  bool proximity(void);
+  uint16_t getSensorDistance(void);
 
-  void print_param(void);
+  void printParams(void);
 
-  double get_posx(void);
-  double get_posy(void);
-  double get_angle(void);
+  double getPosX(void);
+  double getPosY(void);
+  double getAngle(void);
 
-  rundir get_motors_status(void);
+  rundir_t getMotorsStatus(void);
 
   
 
 
 private:
-  Motor motorL;
-  Motor motorR;
-  Tof sensor;
+  Motor _motorL;
+  Motor _motorR;
+  Tof _sensor;
   
   // motors variables
-  unsigned long motors_start_time;
-  rundir motors_on;
+  unsigned long _motors_start_time;
+  rundir_t _motors_state;
 
   // theorical position values
-  double posx_th; //m
-  double posy_th; //m
-  double angle_th; //rad
+  double _posx_th; //m
+  double _posy_th; //m
+  double _angle_th; //rad
 };
