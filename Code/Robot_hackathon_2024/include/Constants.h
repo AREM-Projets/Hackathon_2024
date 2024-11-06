@@ -15,7 +15,7 @@
 #define ROBOT_ANGLUAR_SPEED_COEF 0.87 //coefficient on the rotation speed of the robot
 
 #define ROBOT_WHEEL_SPACING_M 0.114 //robot space between wheels in m
-#define ROBOT_SPEED_MS 0.14 //* ROBOT_SPEED_COEF //robot speed in m/s
+#define ROBOT_SPEED_MS 0.14 //robot speed in m/s
 
 /********************************************************
  * Constantes système - NE PAS MODIFIER
