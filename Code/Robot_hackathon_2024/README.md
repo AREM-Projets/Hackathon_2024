@@ -67,3 +67,11 @@ Le driver mis à votre disposition pour controller le robot possède un grand no
 
 
 **Bonne programmation à tous !**
+
+## Remerciements
+
+Je voudrais adresser mes sincères remerciements pour leur aide lors du développement du projet robot Hackathon 2024 aux personnes suivantes:
+- Jean-Paul Bourguet
+- Kezia Marcou
+- Raphael Comps
+- Lucas Vincent
