@@ -73,6 +73,8 @@ En plus de ces fonctions appliquées au robot, certaines fonctions issues de la 
 - [digitalRead()](https://docs.arduino.cc/language-reference/en/functions/digital-io/digitalread/) uniquement sur le pin BOUTON_EQUIPE
 - [digitalWrite()](https://docs.arduino.cc/language-reference/en/functions/digital-io/digitalwrite/) uniquement sur les pins LED1 et LED2
 - [delay() et delayMicroseconds()](https://docs.arduino.cc/language-reference/en/functions/time/delay/) 
+- [attachInterrupt()](https://www.arduino.cc/reference/tr/language/functions/external-interrupts/attachinterrupt/) si ca vous amuse
+- [la librairie HardwareTimer.h](https://github.com/stm32duino/Arduino_Core_STM32/wiki/HardwareTimer-library) si vous êtes un peu maso sur les bords (TIM6 et TIM7 uniquement pour éviter de casser les moteurs)
 
 **Merci de demander aux organisateurs avant d'utiliser toute autre fonction Arduino ou librairie pour éviter de casser les robots.**
 
