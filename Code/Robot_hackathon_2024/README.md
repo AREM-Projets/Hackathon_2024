@@ -20,9 +20,6 @@ La fonction `setup()` n'est exécutée qu'une seule fois au démarrage du microc
 
 La fonction `loop()` quant à elle, est exécutée en boucle jusqu'à extinction de l'alimentation du microcontrolleur. C'est dedans que vous mettrez en général votre code qui n'est pas de l'initialisation.
 
-
-
-
 ### Les initialisations
 
 Comme expliqué précédemment, les initialisations se trouvent dans la fonction `setup()` et ne sont exécutées qu'une seule fois. 
@@ -45,15 +42,14 @@ Dans la fonction `loop()` se trouvent les balises  ``/* Code utilisateur 2 */`` 
 
 ## Fonctions
 
-Le driver mis à votre disposition pour controller le robot possède un grand nombre de fonctions pour vous permettre de faire réaliser simplement des actions au robot. Ces fonctions sont les suivantes:
-
+Le driver mis à votre disposition pour controller le robot possède un grand nombre de fonctions pour vous permettre de faire réaliser simplement des actions au robot. Ces fonctions sont les suivantes :
 
 | Fonction | Arguments | Retour | Description |
 | - | - | - | - |
 | void init(); | aucun | aucun | Initialise l'embase du robot |
 | void run(rundir_t dir); | dir: FORWARD ou BACKWARD | auncun | Fait rouler le robot indéfiniment dans une direction donnée |
 | void stop(void); | aucun | aucun | Arrête le déplacement du robot |
-| uint16_t getSensorDistance(void); | aucun | distance en mm | renvoie la distance du capteur en mm |
+| uint16_t getSensorDistance(void); | aucun | distance en mm | renvoie la distance de la dernière mesure du capteur en mm (mesure automatique toutes les 200ms) |
 | void printParams(void) | aucun | aucun | affiche les paramètres de position et de détection capteur du robot |
 | void runDistance(double dist_m); | distance en m du déplacement (distance négative pour reculer) | aucun | Déplace le robot dans une direction sur une distance donnée |
 | void turn(double angle_rad); | angle_rad: angle de rotation en radians | aucun | Fait tourner le robot d'un certain nombre de radians |
@@ -62,15 +58,30 @@ Le driver mis à votre disposition pour controller le robot possède un grand no
 | double getAngle(void); | aucun | angle du robot (rad) | retourne l'angle du robot par rapport à sa position de départ |
 | rundir_t getMotorsStatus(void); | aucun | statut des moteurs (FORWARD / BACKWARD / STOP) | renvoie le statut des moteurs pour tester si le robot est en train de rouler ou pas |
 
+Exemple d'utilisation : 
+```cpp
+robot.runDistance(0.5);
+delay(500);
+robot.turn(90*DEG_TO_RAD);
+delay(500);
+robot.runDistance(0.5);
+robot.printParams();
+```
 
+En plus de ces fonctions appliquées au robot, certaines fonctions issues de la librairie Arduino peuvent être utilisées :
+- [Serial.print()](https://www.arduino.cc/reference/tr/language/functions/communication/serial/print/) et ses dérivées (printf, println)
+- [digitalRead()](https://docs.arduino.cc/language-reference/en/functions/digital-io/digitalread/) uniquement sur le pin BOUTON_EQUIPE
+- [digitalWrite()](https://docs.arduino.cc/language-reference/en/functions/digital-io/digitalwrite/) uniquement sur les pins LED1 et LED2
+- [delay() et delayMicroseconds()](https://docs.arduino.cc/language-reference/en/functions/time/delay/) 
 
-
+**Merci de demander aux organisateurs avant d'utiliser toute autre fonction Arduino ou librairie pour éviter de casser les robots.**
 
 **Bonne programmation à tous !**
 
 ## Remerciements
 
-Je voudrais adresser mes sincères remerciements pour leur aide lors du développement du projet robot Hackathon 2024 aux personnes suivantes:
+Je voudrais adresser mes sincères remerciements pour leur aide lors du développement du projet robot Hackathon 2024 aux personnes suivantes :
+
 - Jean-Paul Bourguet
 - Kezia Marcou
 - Raphael Comps

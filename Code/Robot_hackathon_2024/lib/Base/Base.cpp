@@ -3,8 +3,10 @@
 #include "Arduino.h"
 #include <math.h>
 
-
-
+/**
+ * @brief Initialise 
+ * 
+ */
 void Base::init() {
 
   // sensor init
@@ -22,7 +24,11 @@ void Base::init() {
 }
 
 
-
+/**
+ * @brief Fait rouler le robot dans une direction donnée
+ * 
+ * @param dir direction du mouvement (FORWARD / BACKWARD)
+ */
 void Base::run(rundir_t dir) {
   /*Fait rouler en ligne droite le robot dans le sens (avant / arriere) voulu.
   Permet aussi d'arreter le robot via STOP. Cette fonction, comme les autres fonctions de deplacement,
@@ -63,37 +69,59 @@ void Base::run(rundir_t dir) {
   }
 }
 
-
+/**
+ * @brief Arrête le robot.
+ * 
+ */
 void Base::stop(void)
 {
   this->run(STOP);
 }
 
-
-void Base::runDistance(double d) {
-  /*Fait avancer le robot d'une distance en metres donnee*/
-  /*Warning: this method is blocking*/
-  if(d > 0) this->run(FORWARD);
+/**
+ * @brief Fait rouler le robot d'une distance en metres donnee
+ * Attention : fonction bloquante.
+ * 
+ * @param dist_m distance en m (distance négative pour reculer)
+ */
+void Base::runDistance(double dist_m) {
+  if(dist_m > 0) this->run(FORWARD);
   else this->run(BACKWARD);
 
-  delayMicroseconds(d/ROBOT_SPEED_MS*1000000);
+  delayMicroseconds(dist_m/ROBOT_SPEED_MS*1000000);
 
   this->run(STOP);
 
   // update position
-  _posx_th += d*cos(_angle_th);
-  _posy_th += d*sin(_angle_th);
-
+  _posx_th += dist_m*cos(_angle_th);
+  _posy_th += dist_m*sin(_angle_th);
 }
 
-
+/**
+ * @brief tourne d'un angle donné en rad . 
+ * Attention : fonction bloquante.
+ * 
+ * @param angle_rad angle en rad (ou angle en degré * DEG_TO_RAD)
+ */
 void Base::turn(double angle_rad) {
   side_t s;
 
-  _angle_th += angle_rad;
+  _angle_th -= angle_rad;
 
-  if(angle_rad > 0) s = RIGHT;
-  else s = LEFT;
+  // Keep angle between -180 and 180°
+  if (_angle_th > 180*DEG_TO_RAD)
+  {
+    _angle_th -= 360*DEG_TO_RAD;
+  }
+  else if (_angle_th <= -180*DEG_TO_RAD)
+  {
+    _angle_th += 360*DEG_TO_RAD;
+  }
+  
+  
+
+  if(angle_rad > 0) s = LEFT;
+  else s = RIGHT;
 
   if(s == LEFT) {
     _motorL.run(BACKWARD);
@@ -111,7 +139,11 @@ void Base::turn(double angle_rad) {
   }
 }
 
-
+/**
+ * @brief Renvoie la distance détectée par le capteur (en mm)
+ * 
+ * @return uint16_t : distance en mm
+ */
 uint16_t Base::getSensorDistance(void) {
   /*Encapsulation de la methode de proximite de la classe Tof*/
   return _sensor.getDistance();

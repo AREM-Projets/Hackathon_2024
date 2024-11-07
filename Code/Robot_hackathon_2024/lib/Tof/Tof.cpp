@@ -22,7 +22,7 @@ void Tof::init(void) {
   // Start continuous readings at a rate of one measurement every 50 ms (the
   // inter-measurement period). This period should be at least as long as the
   // timing budget.
-  _sensor.startContinuous(200);
+  _sensor.startContinuous(SENSOR_POOL_PERIOD_MS);
 }
 
 void Tof::printDistance(void)

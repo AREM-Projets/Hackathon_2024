@@ -13,8 +13,9 @@ Base robot;
 
 void setup() {
   // initialisation de la connexion usb
-  while (!Serial) {}
   Serial.begin(9600);
+  while (!Serial) {}
+  Serial.println("---Serial ready---");
 
   // initialisation de l'embase du robot (capteur tof et moteurs)
   robot.init();
@@ -39,18 +40,13 @@ void setup() {
   /* Fin code utilisateur 0 */
 
   /* Code utilisateur 1 */
-  //exemple de code
-  robot.turn(80*DEG_TO_RAD);
 
-  robot.run(FORWARD);
-
-  while(robot.getPosY() < 1) {
-    robot.printParams();
-  }
-
-  robot.stop();
-
-  Serial.println();
+  // exemple de code
+  robot.runDistance(0.5);
+  delay(500);
+  robot.turn(90*DEG_TO_RAD);
+  delay(500);
+  robot.runDistance(0.5);
   robot.printParams();
   
   /* Fin code utilisateur 1 */
