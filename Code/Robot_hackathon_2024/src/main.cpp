@@ -42,11 +42,23 @@ void setup() {
   /* Code utilisateur 1 */
 
   // exemple de code
-  robot.runDistance(0.5);
-  delay(500);
-  robot.turn(90*DEG_TO_RAD);
-  delay(500);
-  robot.runDistance(0.5);
+  // robot.run(FORWARD);
+  // while(robot.getPosX() < 1)
+  // {
+  //   robot.printParams();
+  // }
+  // robot.stop();
+
+  // robot.run(BACKWARD);
+  // while(robot.getPosX() > 0)
+  // {
+  //   robot.printParams();
+  // }
+
+  robot.runDistance(1);
+  robot.printParams();
+  delay(1000);
+  robot.runDistance(-robot.getPosX());
   robot.printParams();
   
   /* Fin code utilisateur 1 */

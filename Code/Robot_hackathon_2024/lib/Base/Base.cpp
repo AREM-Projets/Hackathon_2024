@@ -88,13 +88,13 @@ void Base::runDistance(double dist_m) {
   if(dist_m > 0) this->run(FORWARD);
   else this->run(BACKWARD);
 
-  delayMicroseconds(dist_m/ROBOT_SPEED_MS*1000000);
+  delayMicroseconds(fabs(dist_m/(ROBOT_SPEED_MS)*1000000));
 
   this->run(STOP);
 
   // update position
-  _posx_th += dist_m*cos(_angle_th);
-  _posy_th += dist_m*sin(_angle_th);
+  // _posx_th += dist_m*cos(_angle_th);
+  // _posy_th += dist_m*sin(_angle_th);
 }
 
 /**
