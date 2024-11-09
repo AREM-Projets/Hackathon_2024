@@ -79,6 +79,12 @@ En plus de ces fonctions appliquées au robot, certaines fonctions issues de la 
 
 **Merci de demander aux organisateurs avant d'utiliser toute autre fonction Arduino ou librairie pour éviter de casser les robots.**
 
+### Position initiale du robot 
+
+La position initiale du robot est la suivante : 
+
+![image](./images/position_initiale_robot.png)
+
 **Bonne programmation à tous !**
 
 ## Remerciements

@@ -46,7 +46,7 @@ void setup() {
   delay(500);
   robot.turn(90*DEG_TO_RAD);
   delay(500);
-  robot.runDistance(0.5);
+  robot.run(FORWARD);
   robot.printParams();
   
   /* Fin code utilisateur 1 */
@@ -56,6 +56,11 @@ void setup() {
 void loop()
 {
   /* Code utilisateur 2 */
+
+  if (robot.getSensorDistance() < 200)
+  {
+    robot.stop();
+  }
 
   // have fun !
   // N'oubliez pas, comme l'a dit un grand homme : "Y'a un fichier il s'appelle README je me demande pourquoi."
