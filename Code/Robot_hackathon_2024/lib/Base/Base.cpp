@@ -126,14 +126,14 @@ void Base::turn(double angle_rad) {
   if(s == LEFT) {
     _motorL.run(BACKWARD);
     _motorR.run(FORWARD);
-    delayMicroseconds(-angle_rad/ROBOT_ANGULAR_SPEED_RADS*1000000);
+    delayMicroseconds(angle_rad/ROBOT_ANGULAR_SPEED_RADS*1000000);
     _motorL.run(STOP);
     _motorR.run(STOP);
   }
   else if(s == RIGHT) {
     _motorL.run(FORWARD);
     _motorR.run(BACKWARD);
-    delayMicroseconds(angle_rad/ROBOT_ANGULAR_SPEED_RADS*1000000);
+    delayMicroseconds(-angle_rad/ROBOT_ANGULAR_SPEED_RADS*1000000);
     _motorL.run(STOP);
     _motorR.run(STOP);
   }
