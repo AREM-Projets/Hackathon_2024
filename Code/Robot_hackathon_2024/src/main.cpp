@@ -69,6 +69,11 @@ void loop()
 {
   /* Code utilisateur 2 */
 
+  if (robot.getSensorDistance() < 200)
+  {
+    robot.stop();
+  }
+
   // have fun !
   // N'oubliez pas, comme l'a dit un grand homme : "Y'a un fichier il s'appelle README je me demande pourquoi."
 
