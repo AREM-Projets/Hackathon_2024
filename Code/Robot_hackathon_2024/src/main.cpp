@@ -7,26 +7,26 @@ Date: 11/2024
 #include "Arduino.h"
 #include "Base.h" //bibliotheque qui contient les fonctions pour controller le robot
 
-
-// On cree un objet robot. C'est un peu un jumeau virtuel du robot qui permet de le controller via des fonctions propres (methodes)
+HardwareSerial Serial1(PA10, PA9); // uart telecommande
 Base robot;
+char recval;
 
 void setup() {
-  // initialisation de la connexion usb
+
+
   Serial.begin(9600);
+  Serial1.begin(115200);
+
   while (!Serial) {}
   Serial.println("---Serial ready---");
 
-  // initialisation de l'embase du robot (capteur tof et moteurs)
   robot.init();
 
-  // initialisation du bouton équipe et des leds equipe
   pinMode(BOUTON_EQUIPE, INPUT_PULLUP);
   pinMode(LED1, OUTPUT);
   pinMode(LED2, OUTPUT);
 
-  /* Code utilisateur 0 */
-  // Allumage LED equipe en fonction du bouton equipe
+  
   if(digitalRead(BOUTON_EQUIPE))
   {
     digitalWrite(LED1, 1);
@@ -36,45 +36,51 @@ void setup() {
   {
     digitalWrite(LED1, 0); 
     digitalWrite(LED2, 1);
-  }
-  /* Fin code utilisateur 0 */
-
-  /* Code utilisateur 1 */
-
-  // exemple de code
-  // robot.run(FORWARD);
-  // while(robot.getPosX() < 1)
-  // {
-  //   robot.printParams();
-  // }
-  // robot.stop();
-
-  // robot.run(BACKWARD);
-  // while(robot.getPosX() > 0)
-  // {
-  //   robot.printParams();
-  // }
-
-  robot.runDistance(1);
-  robot.printParams();
-  delay(1000);
-  robot.runDistance(-robot.getPosX());
-  robot.printParams();
-  
-  /* Fin code utilisateur 1 */
+  }  
 }
 
 
 void loop()
 {
-  /* Code utilisateur 2 */
+  while (Serial1.available()) {
+    recval = Serial1.read(); // recuperation caractere uart
+    Serial.print("Message reçu : ");
+    Serial.println(recval);
+    
 
+    switch (recval)
+    {
+    case 'c':
+      // stop
+      robot.stop();
+      break;
 
+    case 'u':
+      // avancer
+      robot.run(FORWARD);
+      break;
 
-  // have fun !
-  // N'oubliez pas, comme l'a dit un grand homme : "Y'a un fichier il s'appelle README je me demande pourquoi."
+    case 'd':
+      // reculer
+      robot.run(BACKWARD);
+      break;
 
-  /* Fin code utilisateur 2 */
+    case 'l':
+      // tourner a gauche
+      robot.turn(15*DEG_TO_RAD);
+      break;
+
+    case 'r':
+      // tourner a droite
+      robot.turn(-15*DEG_TO_RAD);
+      break;
+    
+    default:
+      break;
+    }
+
+  }
+  
 }
 
 
