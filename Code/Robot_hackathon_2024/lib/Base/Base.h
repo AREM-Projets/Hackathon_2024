@@ -19,8 +19,9 @@ public:
   void init();
 
   void run(rundir_t dir);
+  void turn(side_t s);
   void runDistance(double dist_m);
-  void turn(double angle_rad);
+  void turnAngle(double angle_rad);
   void stop(void);
   
   uint16_t getSensorDistance(void);

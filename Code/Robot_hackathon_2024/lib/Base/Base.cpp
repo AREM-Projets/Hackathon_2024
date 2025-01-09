@@ -93,13 +93,35 @@ void Base::runDistance(double dist_m) {
   this->run(STOP);
 }
 
+
+/**
+ * @brief tourne d'un angle donné en rad . 
+ * Attention : fonction bloquante.
+ * 
+ * @param s sens de rotation: LEFT ou RIGHT
+ */
+void Base::turn(side_t s) {
+  if(s == LEFT) {
+    _motors_state = FORWARD;
+    _motorL.run(BACKWARD);
+    _motorR.run(FORWARD);
+  }
+  else if(s == RIGHT) {
+    _motors_state = BACKWARD;
+    _motorL.run(FORWARD);
+    _motorR.run(BACKWARD);
+  }
+}
+
+
+
 /**
  * @brief tourne d'un angle donné en rad . 
  * Attention : fonction bloquante.
  * 
  * @param angle_rad angle en rad (ou angle en degré * DEG_TO_RAD)
  */
-void Base::turn(double angle_rad) {
+void Base::turnAngle(double angle_rad) {
   side_t s;
 
   _angle_th -= angle_rad;

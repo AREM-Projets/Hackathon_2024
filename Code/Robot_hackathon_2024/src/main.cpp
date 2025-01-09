@@ -36,7 +36,8 @@ void setup() {
   {
     digitalWrite(LED1, 0); 
     digitalWrite(LED2, 1);
-  }  
+  }
+
 }
 
 
@@ -57,22 +58,26 @@ void loop()
 
     case 'u':
       // avancer
+      robot.stop();
       robot.run(FORWARD);
       break;
 
     case 'd':
       // reculer
+      robot.stop();
       robot.run(BACKWARD);
       break;
 
     case 'l':
       // tourner a gauche
-      robot.turn(15*DEG_TO_RAD);
+      robot.stop();
+      robot.turn(LEFT);
       break;
 
     case 'r':
       // tourner a droite
-      robot.turn(-15*DEG_TO_RAD);
+      robot.stop();
+      robot.turn(RIGHT);
       break;
     
     default:
