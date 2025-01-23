@@ -23,6 +23,18 @@ void Base::init() {
   _angle_th = 0;
 }
 
+/**
+ * @brief Fait rouler le robot en controllant les vitesses de chacun des moteurs
+ * 
+ * @param left_speed vitesse moteur gauche
+ * @param right_speed vitesse moteur droit
+ */
+void Base::run_speed(int left_speed, int right_speed) {
+  _motorL.run_speed(left_speed);
+  _motorR.run_speed(right_speed);
+}
+
+
 
 /**
  * @brief Fait rouler le robot dans une direction donnée

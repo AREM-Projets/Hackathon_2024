@@ -47,3 +47,9 @@ void Motor::run(rundir_t dir) {
   }
 }
 
+
+
+void Motor::run_speed(int speed) {
+  if(_motor_side == LEFT)  _motor_port.writeMicroseconds(_motor_stop + speed);
+  if(_motor_side == RIGHT) _motor_port.writeMicroseconds(_motor_stop - speed);
+}

@@ -11,6 +11,7 @@ class Motor
 public:
   void init(side_t side);
   void run(rundir_t dir);
+  void run_speed(int speed);
 
 
 private:

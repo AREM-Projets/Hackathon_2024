@@ -18,6 +18,8 @@ class Base
 public:
   void init();
 
+  void run_speed(int left_speed, int right_speed);
+
   void run(rundir_t dir);
   void turn(side_t s);
   void runDistance(double dist_m);
