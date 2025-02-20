@@ -11,6 +11,7 @@ TODO:
 #include "Tof.h"
 #include "Motor.h"
 
+#define SPEED_INC 100
 
 
 class Base

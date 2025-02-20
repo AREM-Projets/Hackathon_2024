@@ -4,10 +4,10 @@ Auteur: Antoine Chassaigne
 Date: 11/2024
 */
 
-#define SPEED_INC 220
 
 #include "Arduino.h"
 #include "Base.h" //bibliotheque qui contient les fonctions pour controller le robot
+#include "RobotsConfig.h"
 
 HardwareSerial Serial1(PA10, PA9); // uart telecommande
 Base robot;
@@ -65,15 +65,10 @@ void loop()
     case 'u':
       // avancer
       // robot.stop();
-      // robot.run(FORWARD);
-
-      // petit algo pour se remettre a avancer tout droit quand on appuie sur avancer en etant en rotation
-      if(lspeed > rspeed) rspeed = lspeed;
-      else if(rspeed > lspeed) lspeed = rspeed;
-      else {
-        lspeed += SPEED_INC;
-        rspeed += SPEED_INC;
-      }
+      // robot.run(FORWARD);      
+      lspeed = SPEED_INC*LINEAR_SPEED;
+      rspeed = SPEED_INC*LINEAR_SPEED;
+    
       
       break;
 
@@ -81,24 +76,30 @@ void loop()
       // reculer
       // robot.stop();
       // robot.run(BACKWARD);
-      lspeed -= SPEED_INC;
-      rspeed -= SPEED_INC;
+      lspeed = -SPEED_INC*LINEAR_SPEED;
+      rspeed = -SPEED_INC*LINEAR_SPEED;
       break;
 
     case 'l':
       // tourner a gauche
       // robot.stop();
       // robot.turn(LEFT);
-      lspeed -= SPEED_INC;
-      rspeed += SPEED_INC;
+      if(lspeed == rspeed) {
+        // si on est pas en train de tourner
+        lspeed -= SPEED_INC*ROTATION_SPEED;
+        rspeed += SPEED_INC*ROTATION_SPEED;
+      }
       break;
 
     case 'r':
       // tourner a droite
       // robot.stop();
       // robot.turn(RIGHT);
-      lspeed += SPEED_INC;
-      rspeed -= SPEED_INC;
+      if(lspeed == rspeed) {
+        // si on est pas en train de tourner
+        lspeed += SPEED_INC*ROTATION_SPEED;
+        rspeed -= SPEED_INC*ROTATION_SPEED;
+      }
       break;
     
     default:
