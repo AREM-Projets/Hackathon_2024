@@ -2,7 +2,5 @@
 Dépôt pour le projet Hackathon 2024
 
 
-## Avancée du projet
-
-* Robots opérationnels mécaniquement, électriquement
-* Code driver bien avancé. Ok pour Hackathon
+## Robots sumo
+Le code pour les robots sumo est dans la branche *Telecommande_UART*
